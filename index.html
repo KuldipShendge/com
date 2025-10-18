@@ -8,14 +8,126 @@
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 		<style>
 			/* local helper styles kept in the page */
-			#particles-js { position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: 1; }
-			.feature-list { list-style: none; padding-left: 0; }
-			.feature-list li { padding: 1em 0; border-top: solid 1px rgba(255, 255, 255, 0.2); display: flex; align-items: center; }
-			.feature-list li:first-child { border-top: 0; }
-			.feature-list .item-content { flex-grow: 1; }
-			.feature-list h4 { margin: 0 0 0.5rem 0; letter-spacing: 0.1rem; }
-			.feature-list a { border-bottom: none; }
-			.feature-list img { margin-right: 15px; border-radius: 4px; width: 80px; height: 80px; object-fit: cover; }
+			/* ---- Grid Layout for Projects & Blogs ---- */
+
+/* 1. Set up the grid container */
+.feature-list {
+    list-style: none;
+    padding-left: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Creates two equal columns */
+    gap: 1.5rem; /* Space between grid items */
+}
+
+/* 2. Style each grid item (the <li>) */
+.feature-list li {
+    position: relative; /* Crucial for positioning the hover content */
+    border-radius: 6px;
+    overflow: hidden;   /* Hides the content that overflows */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    
+    /* Remove old list styles */
+    padding: 0;
+    border-top: 0;
+    display: block; /* Override the old 'display: flex' */
+}
+
+/* 3. Style the image to fill the grid item */
+.feature-list li img {
+    display: block;
+    width: 100%;
+    height: 250px; /* Give the card a fixed height */
+    object-fit: cover;
+    border-radius: 0;
+    margin-right: 0;
+    transition: transform 0.3s ease;
+}
+
+/* 4. Style the hover content overlay */
+.feature-list .item-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* Overlay background */
+    background-color: rgba(27, 31, 34, 0.9); /* Dark overlay */
+    
+    /* Hide it by default */
+    opacity: 0;
+    visibility: hidden;
+    
+    /* Smooth transition */
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    
+    /* Center the text inside */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    text-align: center;
+    
+    /* Remove old list styles */
+    flex-grow: 0;
+}
+
+/* 5. The hover effect */
+.feature-list li:hover .item-content {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Optional: Add a slight zoom to the image on hover */
+.feature-list li:hover img {
+    transform: scale(1.05);
+}
+
+/* 6. Style the text on the overlay */
+.feature-list .item-content h4 {
+    color: #ffffff;
+    margin: 0 0 0.5rem 0;
+    letter-spacing: 0.1rem;
+}
+
+.feature-list .item-content p {
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0 0 1rem 0;
+    font-size: 0.9rem;
+}
+
+/* Style the link in the blogs section */
+#blogs .feature-list .item-content a {
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.1rem;
+    border-bottom: none;
+    line-height: 1.4;
+}
+
+#blogs .feature-list .item-content a:hover {
+    color: #dddddd;
+}
+
+/* Style the project link/button */
+#projects .feature-list .item-content a {
+    border-bottom: none;
+    /* This will automatically use your existing .button.small style */
+}
+
+/* ---- Responsive Grid for Mobile ---- */
+@media screen and (max-width: 736px) {
+    .feature-list {
+        grid-template-columns: 1fr; /* Stack to one column on mobile */
+        gap: 1rem;
+    }
+
+    .feature-list li img {
+        height: 200px; /* Adjust height for mobile */
+    }
+}
 
 			/* small helper for the name logo */
 			.name-logo {
@@ -410,3 +522,4 @@
 
 	</body>
 </html>
+
