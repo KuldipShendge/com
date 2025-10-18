@@ -1434,7 +1434,20 @@ input, select, textarea {
 					display: none;
 				}
 
+		/* --- ADD THESE NEW STYLES BELOW --- */
+
+		/* Fix for header name on mobile */
+		#header .content .inner h1 {
+			font-size: 28px !important;    /* Makes the font smaller */
+			padding-left: 0 !important;   /* Removes the large padding */
+			gap: 8px !important;          /* Reduces space around logo */
 		}
+		
+		/* Fix for the logo inside the name on mobile */
+		.name-logo {
+			width: 45px !important;     /* Makes the logo image smaller */
+		}
+}
 
 /* Main */
 
