@@ -789,14 +789,23 @@ input, select, textarea {
 			vertical-align: middle;
 		}
 
-		ul.actions.special {
+		/* ADD THIS NEW RULE */
+		ul.icons.special {
 			-moz-justify-content: center;
 			-webkit-justify-content: center;
 			-ms-justify-content: center;
 			justify-content: center;
 			width: 100%;
 			margin-left: 0;
-		}
+}
+        ul.actions.special {
+			-moz-justify-content: center;
+			-webkit-justify-content: center;
+			-ms-justify-content: center;
+			justify-content: center;
+			width: 100%;
+			margin-left: 0;
+}
 
 			ul.actions.special li:first-child {
 				padding-left: 0;
@@ -1438,7 +1447,7 @@ input, select, textarea {
 
 		/* Fix for header name on mobile */
 		#header .content .inner h1 {
-			font-size: 24px !important;    /* Makes the font smaller */
+			font-size: 28px !important;    /* Makes the font smaller */
 			padding-left: 0 !important;   /* Removes the large padding */
 			gap: 8px !important;          /* Reduces space around logo */
 		}
