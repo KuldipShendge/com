@@ -137,7 +137,7 @@
 
 			/* ---- Background colour override ---- */
 			html, body {
-				background-color: #0f1923 !important;
+				background-color: #0d1117 !important;
 			}
 
 			/* ---- JetBrains Mono globally ---- */
@@ -166,7 +166,7 @@
 				content: '';
 				position: absolute;
 				inset: 0;
-				border: 2px solid #d4537e;
+				border: 2px solid #06d6a0;
 				border-radius: 4px;
 				clip-path: inset(0 100% 0 0);
 				transition: clip-path 0.55s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
@@ -576,7 +576,7 @@
 			<script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
 			<script>
 				tsParticles.load("particles-js", {
-				background: { color: { value: "#0f1923" } },
+				background: { color: { value: "#0d1117" } },
 				fpsLimit: 60,
 				interactivity: {
 					events: {
@@ -585,13 +585,13 @@
 						resize: true
 					},
 					modes: {
-						repulse: { distance: 120, duration: 0.5 },
+						repulse: { distance: 130, duration: 0.4 },
 						push: { quantity: 2 }
 					}
 				},
 				particles: {
 					color: {
-						value: ["#ffffff", "#d4537e", "#7dd3fc", "#a5f3fc", "#c4b5fd"]
+						value: ["#ffffff", "#06d6a0", "#7dd3fc", "#c4b5fd", "#d4537e"]
 					},
 					shape: {
 						type: "char",
@@ -605,32 +605,40 @@
 							}
 						}
 					},
+					links: {
+						enable: true,
+						distance: 140,
+						color: "#06d6a0",
+						opacity: 0.25,
+						width: 0.8,
+						triangles: { enable: false }
+					},
 					move: {
 						direction: "none",
 						enable: true,
 						outModes: { default: "out" },
 						random: true,
-						speed: 0.7,
+						speed: 1.6,
 						straight: false
 					},
 					number: {
-						value: 55,
+						value: 60,
 						density: { enable: true, area: 900 }
 					},
 					opacity: {
-						value: 0.45,
-						random: { enable: true, minimumValue: 0.1 },
-						animation: { enable: true, speed: 0.5, minimumValue: 0.1, sync: false }
+						value: 0.7,
+						random: { enable: true, minimumValue: 0.2 },
+						animation: { enable: true, speed: 0.6, minimumValue: 0.15, sync: false }
 					},
 					size: {
-						value: { min: 8, max: 18 },
+						value: { min: 9, max: 20 },
 						random: true
 					},
 					rotate: {
 						value: { min: 0, max: 360 },
 						random: true,
 						direction: "random",
-						animation: { enable: true, speed: 3, sync: false }
+						animation: { enable: true, speed: 4, sync: false }
 					}
 				},
 				detectRetina: true
