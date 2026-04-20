@@ -8,187 +8,171 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 
     <link rel="icon" type="image/png" href="images/name.png">
-    
-    <!-- FONT OPTIONS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Inter (Ultra-clean, modern Sans-Serif - Matches uploaded image) -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <!-- Fira Code (Fallback) -->
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/main.css" />
     <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
     <style>
-			/* ==========================================
-			   THEME VARIABLES & FONT SELECTION
-			   ========================================== */
-			:root {
-				--bg-color: #f7f8fa; /* Off-white / Soft Pearl */
-				--text-main: #333333;
-				--text-heading: #111111;
-				--text-muted: #4a4a4a;
-				--accent-color: #06d6a0;
-				
-				/* Set to Inter to match the uploaded screenshot */
-				--main-font: 'Inter', sans-serif;
-			}
-
-			/* Apply Background and Font globally */
-			html, body, #wrapper, #main article {
-				background-color: var(--bg-color) !important;
-				color: var(--text-main) !important;
-			}
-
-			*, body, input, select, textarea, button {
-				font-family: var(--main-font) !important;
-				line-height: 1.6;
-			}
-
-			h1, h2, h3, h4, h5, h6, b, strong {
-				color: var(--text-heading) !important;
-				font-weight: 700 !important;
-			}
-			
-			p, li, i, em {
-				color: var(--text-muted) !important;
-			}
-
 			/* ---- Grid Layout for Projects & Blogs ---- */
-			.feature-list {
-				list-style: none;
-				padding-left: 0;
-				display: grid;
-				grid-template-columns: 1fr 1fr;
-				gap: 1.5rem;
+
+/* 1. Set up the grid container */
+.feature-list {
+    list-style: none;
+    padding-left: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Creates two equal columns */
+    gap: 1.5rem; /* Space between grid items */
+}
+
+/* 2. Style each grid item (the <li>) */
+.feature-list li {
+    position: relative; /* Crucial for positioning the hover content */
+    border-radius: 6px;
+    overflow: hidden;   /* Hides the content that overflows */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    
+    /* Remove old list styles */
+    padding: 0;
+    border-top: 0;
+    display: block; /* Override the old 'display: flex' */
+}
+
+/* 3. Style the image to fill the grid item */
+.feature-list li img {
+    display: block;
+    width: 100%;
+    height: 250px; /* Give the card a fixed height */
+    object-fit: cover;
+    border-radius: 0;
+    margin-right: 0;
+    transition: transform 0.3s ease;
+}
+
+/* 4. Style the hover content overlay */
+.feature-list .item-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* Overlay background */
+    background-color: rgba(27, 31, 34, 0.9); /* Dark overlay */
+    
+    /* Hide it by default */
+    opacity: 0;
+    visibility: hidden;
+    
+    /* Smooth transition */
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    
+    /* Center the text inside */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    text-align: center;
+    
+    /* Remove old list styles */
+    flex-grow: 0;
+}
+
+/* 5. The hover effect */
+.feature-list li:hover .item-content {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Optional: Add a slight zoom to the image on hover */
+.feature-list li:hover img {
+    transform: scale(1.05);
+}
+
+/* 6. Style the text on the overlay */
+.feature-list .item-content h4 {
+    color: #ffffff;
+    margin: 0 0 0.5rem 0;
+    letter-spacing: 0.1rem;
+}
+
+.feature-list .item-content p {
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0 0 1rem 0;
+    font-size: 0.9rem;
+}
+
+/* Style the link in the blogs section */
+#blogs .feature-list .item-content a {
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.1rem;
+    border-bottom: none;
+    line-height: 1.4;
+}
+
+#blogs .feature-list .item-content a:hover {
+    color: #dddddd;
+}
+
+/* Style the project link/button */
+#projects .feature-list .item-content a {
+    border-bottom: none;
+    /* This will automatically use your existing .button.small style */
+}
+
+/* ---- Responsive Grid for Mobile ---- */
+@media screen and (max-width: 736px) {
+    .feature-list {
+        grid-template-columns: 1fr; /* Stack to one column on mobile */
+        gap: 1rem;
+    }
+
+    .feature-list li img {
+        height: 200px; /* Adjust height for mobile */
+    }
+}
+
+			/* ---- Background colour override ---- */
+			html, body {
+				background-color: #0d1117 !important;
 			}
 
-			.feature-list li {
-				position: relative;
-				border-radius: 6px;
-				overflow: hidden;
-				box-shadow: 0 4px 15px rgba(0,0,0,0.08); /* Lighter shadow for light theme */
-				padding: 0;
-				border-top: 0;
-				display: block;
+			/* ---- JetBrains Mono globally ---- */
+			*, body, input, select, textarea, button {
+				font-family: 'JetBrains Mono', monospace !important;
 			}
 
-			.feature-list li img {
-				display: block;
-				width: 100%;
-				height: 250px;
-				object-fit: cover;
-				border-radius: 0;
-				margin-right: 0;
-				transition: transform 0.3s ease;
-			}
-
-			.feature-list .item-content {
-				position: absolute;
-				top: 0;
-				left: 0;
-				width: 100%;
-				height: 100%;
-				background-color: rgba(27, 31, 34, 0.9); /* Dark overlay */
-				opacity: 0;
-				visibility: hidden;
-				transition: opacity 0.3s ease, visibility 0.3s ease;
-				display: flex;
-				flex-direction: column;
-				justify-content: center;
-				align-items: center;
-				padding: 1.2rem;
-				text-align: center;
-			}
-
-			.feature-list li:hover .item-content {
-				opacity: 1;
-				visibility: visible;
-			}
-
-			.feature-list li:hover img {
-				transform: scale(1.05);
-			}
-
-			/* Smaller font sizes in the boxes */
-			.feature-list .item-content h4 {
-				color: #ffffff !important;
-				margin: 0 0 0.4rem 0;
-				letter-spacing: 0.05rem;
-				font-size: 1.05rem; /* Reduced from default */
-			}
-
-			.feature-list .item-content p {
-				color: rgba(255, 255, 255, 0.85) !important;
-				margin: 0 0 0.8rem 0;
-				font-size: 0.82rem; /* Reduced from 0.9rem */
-				line-height: 1.4;
-			}
-
-			#blogs .feature-list .item-content a {
-				color: #ffffff;
-				font-size: 0.95rem; /* Reduced from 1.1rem */
-				font-weight: 600;
-				letter-spacing: 0.05rem;
-				border-bottom: none;
-				line-height: 1.3;
-			}
-
-			#blogs .feature-list .item-content a:hover {
-				color: var(--accent-color);
-			}
-
-			#projects .feature-list .item-content a {
-				border-bottom: none;
-				border-color: rgba(255,255,255,0.5) !important;
-				color: #fff !important;
-				font-size: 0.75rem; /* Smaller button text */
-				padding: 0.4em 1em !important;
-			}
-
-			@media screen and (max-width: 736px) {
-				.feature-list {
-					grid-template-columns: 1fr;
-					gap: 1rem;
-				}
-				.feature-list li img {
-					height: 200px;
-				}
-			}
-
-			/* ---- Name / heading size tweaks ---- */
+			/* ---- Name / heading size tweaks for mono font ---- */
 			#header .content .inner h1 {
-				letter-spacing: 0.1em;
+				letter-spacing: 0.15em;
 				font-weight: 700;
 			}
 			#header .content .inner p {
-				letter-spacing: 0.02em;
-				font-size: 0.85em;
+				letter-spacing: 0.04em;
+				font-size: 0.82em;
 			}
 
-			/* ==========================================
-			   NEW BOX OPENING: BORDER INTERSECTS HEADING
-			   ========================================== */
+			/* ---- Box opening: Border draw reveal (D) ---- */
 			#main article {
 				transform: translateX(-12px) !important;
 				opacity: 0 !important;
 				transition: opacity 0.45s ease, transform 0.45s ease !important;
 				position: relative;
-				padding: 3.5rem 2rem 2rem 2rem !important;
 			}
-			
 			#main article::before {
 				content: '';
 				position: absolute;
 				inset: 0;
-				border: 2px solid var(--accent-color);
+				border: 2px solid #06d6a0;
 				border-radius: 4px;
 				clip-path: inset(0 100% 0 0);
 				transition: clip-path 0.55s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
 				pointer-events: none;
 				z-index: 100;
 			}
-			
 			#main article.active {
 				transform: translateX(0) !important;
 				opacity: 1 !important;
@@ -197,29 +181,7 @@
 				clip-path: inset(0 0% 0 0);
 			}
 
-			#main article h2.major {
-				position: absolute;
-				top: -16px;
-				left: 2rem;
-				margin: 0 !important;
-				padding: 0 15px;
-				background-color: var(--bg-color);
-				color: var(--text-heading) !important;
-				font-weight: 700;
-				z-index: 101;
-				opacity: 0;
-				transform: translateY(10px);
-				transition: opacity 0.4s ease 0.4s, transform 0.4s ease 0.4s;
-			}
-
-			#main article.active h2.major {
-				opacity: 1;
-				transform: translateY(0);
-			}
-
-			#main article h2.major::after { display: none !important; }
-
-			/* ---- Light Mode Navigation Styling ---- */
+			/* ---- Box / Panel opening style ---- */
 			#header nav ul {
 				display: flex;
 				flex-wrap: wrap;
@@ -228,28 +190,31 @@
 				padding: 0;
 				list-style: none;
 			}
-			#header nav ul li { border: none !important; }
-			
+			#header nav ul li {
+				border: none !important;
+			}
+			#header nav ul li:first-child {
+				border: none !important;
+			}
 			#header nav ul li a {
 				display: inline-block;
 				padding: 0.55em 1.4em !important;
-				border: 1px solid rgba(0,0,0,0.15) !important;
+				border: 1px solid rgba(255,255,255,0.25) !important;
 				border-radius: 4px !important;
-				font-size: 0.75em !important;
-				letter-spacing: 0.15em !important;
+				font-size: 0.72em !important;
+				letter-spacing: 0.18em !important;
 				font-weight: 600 !important;
-				color: var(--text-main) !important;
-				background: rgba(0,0,0,0.02) !important;
-				transition: all 0.25s ease !important;
+				color: rgba(255,255,255,0.85) !important;
+				background: rgba(255,255,255,0.04) !important;
+				transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease, transform 0.15s ease !important;
 				text-transform: uppercase;
 				position: relative;
 			}
-			
 			#header nav ul li a::after {
 				content: '';
 				display: block;
 				position: absolute;
-				bottom: -1px;
+				bottom: 0;
 				left: 50%;
 				transform: translateX(-50%);
 				width: 0;
@@ -258,48 +223,40 @@
 				border-radius: 2px;
 				transition: width 0.25s ease;
 			}
-			
 			#header nav ul li a:hover {
-				background: rgba(0,0,0,0.06) !important;
-				border-color: rgba(0,0,0,0.3) !important;
-				color: #000 !important;
+				background: rgba(255,255,255,0.1) !important;
+				border-color: rgba(255,255,255,0.55) !important;
+				color: #ffffff !important;
 				transform: translateY(-2px);
 			}
-			
-			#header nav ul li a:hover::after { width: 60%; }
-			
+			#header nav ul li a:hover::after {
+				width: 60%;
+			}
 			#header nav ul li a:active {
 				transform: translateY(0px);
-				background: rgba(212,83,126,0.1) !important;
+				background: rgba(212,83,126,0.15) !important;
 				border-color: #d4537e !important;
 			}
 
-			.button.primary { background-color: var(--accent-color) !important; color: #fff !important; }
-			ul.icons li a { color: var(--text-muted) !important; }
-			ul.icons li a:hover { color: var(--accent-color) !important; }
-
+			/* ---- small helper for the name logo ---- */
 			.name-logo {
 				vertical-align: middle;
 				width: 70px;
 				height: auto;
-				filter: brightness(0.2) opacity(0.85);
+				filter: brightness(6) grayscale(100%) contrast(200%);
 				transition: filter 0.3s ease;
-				mix-blend-mode: multiply;
+				-webkit-filter: brightness(6) grayscale(100%) contrast(200%);
+				mix-blend-mode: screen;
 			}
-			.name-logo:hover { filter: brightness(0) opacity(1); }
+			.name-logo:hover { filter: brightness(8) grayscale(100%) contrast(220%); }
 
-			ul.icons.special { text-align: center; }
+			/* Center the icons list */
+			ul.icons.special {
+				text-align: center;
+			}
 
-			/* ---- Particles Background Enforced Overlay ---- */
-			#bg {
-				position: fixed !important; /* Locks background to viewport */
-				top: 0; left: 0;
-				width: 100vw; height: 100vh;
-				z-index: 0;
-			}
-			#particles-js {
-				width: 100%; height: 100%;
-			}
+			/* ensure particles layer is behind content but above background */
+			#bg { z-index: 0; }
 			#wrapper { z-index: 3; position: relative; }
 		</style>
 	</head>
@@ -619,7 +576,7 @@
 			<script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
 			<script>
 				tsParticles.load("particles-js", {
-				background: { color: { value: "#f7f8fa" } }, 
+				background: { color: { value: "#0d1117" } },
 				fpsLimit: 60,
 				interactivity: {
 					events: {
@@ -634,18 +591,16 @@
 				},
 				particles: {
 					color: {
-						/* Made the particle colors slightly bolder to stand out against white */
-						value: ["#333333", "#06d6a0", "#0284c7", "#7c3aed", "#e11d48"] 
+						value: ["#ffffff", "#06d6a0", "#7dd3fc", "#c4b5fd", "#d4537e"]
 					},
 					shape: {
 						type: "char",
 						options: {
 							char: {
-								/* Mathematical symbols included clearly */
 								value: ["0", "1", "π", "∑", "σ", "μ", "∂", "∫", "%", "∞", "λ", "∇", "Δ"],
-								font: "Inter, sans-serif", /* Changed font here so it renders flawlessly */
+								font: "JetBrains Mono, monospace",
 								style: "",
-								weight: "600",
+								weight: "400",
 								fill: true
 							}
 						}
@@ -654,8 +609,8 @@
 						enable: true,
 						distance: 140,
 						color: "#06d6a0",
-						opacity: 0.4,
-						width: 1,
+						opacity: 0.25,
+						width: 0.8,
 						triangles: { enable: false }
 					},
 					move: {
@@ -667,16 +622,16 @@
 						straight: false
 					},
 					number: {
-						value: 65,
+						value: 60,
 						density: { enable: true, area: 900 }
 					},
 					opacity: {
-						value: 0.8,
-						random: { enable: true, minimumValue: 0.4 },
-						animation: { enable: true, speed: 0.6, minimumValue: 0.25, sync: false }
+						value: 0.7,
+						random: { enable: true, minimumValue: 0.2 },
+						animation: { enable: true, speed: 0.6, minimumValue: 0.15, sync: false }
 					},
 					size: {
-						value: { min: 10, max: 22 },
+						value: { min: 9, max: 20 },
 						random: true
 					},
 					rotate: {
