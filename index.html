@@ -13,176 +13,187 @@
     <style>
 			/* ---- Grid Layout for Projects & Blogs ---- */
 
-/* 1. Set up the grid container */
-.feature-list {
-    list-style: none;
-    padding-left: 0;
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* Creates two equal columns */
-    gap: 1.5rem; /* Space between grid items */
-}
+			/* 1. Set up the grid container */
+			.feature-list {
+				list-style: none;
+				padding-left: 0;
+				display: grid;
+				grid-template-columns: 1fr 1fr; /* Creates two equal columns */
+				gap: 1.5rem; /* Space between grid items */
+			}
 
-/* 2. Style each grid item (the <li>) */
-.feature-list li {
-    position: relative; /* Crucial for positioning the hover content */
-    border-radius: 6px;
-    overflow: hidden;   /* Hides the content that overflows */
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    
-    /* Remove old list styles */
-    padding: 0;
-    border-top: 0;
-    display: block; /* Override the old 'display: flex' */
-}
+			/* 2. Style each grid item (the <li>) */
+			.feature-list li {
+				position: relative; /* Crucial for positioning the hover content */
+				border-radius: 6px;
+				overflow: hidden;   /* Hides the content that overflows */
+				box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+				
+				/* Remove old list styles */
+				padding: 0;
+				border-top: 0;
+				display: block; /* Override the old 'display: flex' */
+			}
 
-/* 3. Style the image to fill the grid item */
-.feature-list li img {
-    display: block;
-    width: 100%;
-    height: 250px; /* Give the card a fixed height */
-    object-fit: cover;
-    border-radius: 0;
-    margin-right: 0;
-    transition: transform 0.3s ease;
-}
+			/* 3. Style the image to fill the grid item */
+			.feature-list li img {
+				display: block;
+				width: 100%;
+				height: 250px; /* Give the card a fixed height */
+				object-fit: cover;
+				border-radius: 0;
+				margin-right: 0;
+				transition: transform 0.3s ease;
+			}
 
-/* 4. Style the hover content overlay */
-.feature-list .item-content {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    
-    /* Overlay background */
-    background-color: rgba(27, 31, 34, 0.9); /* Dark overlay */
-    
-    /* Hide it by default */
-    opacity: 0;
-    visibility: hidden;
-    
-    /* Smooth transition */
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-    
-    /* Center the text inside */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-    text-align: center;
-    
-    /* Remove old list styles */
-    flex-grow: 0;
-}
+			/* 4. Style the hover content overlay */
+			.feature-list .item-content {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				
+				/* Overlay background */
+				background-color: rgba(27, 31, 34, 0.9); /* Dark overlay */
+				
+				/* Hide it by default */
+				opacity: 0;
+				visibility: hidden;
+				
+				/* Smooth transition */
+				transition: opacity 0.3s ease, visibility 0.3s ease;
+				
+				/* Center the text inside */
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				padding: 1rem;
+				text-align: center;
+				
+				/* Remove old list styles */
+				flex-grow: 0;
+			}
 
-/* 5. The hover effect */
-.feature-list li:hover .item-content {
-    opacity: 1;
-    visibility: visible;
-}
+			/* 5. The hover effect */
+			.feature-list li:hover .item-content {
+				opacity: 1;
+				visibility: visible;
+			}
 
-/* Optional: Add a slight zoom to the image on hover */
-.feature-list li:hover img {
-    transform: scale(1.05);
-}
+			/* Optional: Add a slight zoom to the image on hover */
+			.feature-list li:hover img {
+				transform: scale(1.05);
+			}
 
-/* 6. Style the text on the overlay */
-.feature-list .item-content h4 {
-    color: #ffffff;
-    margin: 0 0 0.5rem 0;
-    letter-spacing: 0.1rem;
-}
+			/* 6. Style the text on the overlay */
+			.feature-list .item-content h4 {
+				color: #ffffff;
+				margin: 0 0 0.5rem 0;
+				letter-spacing: 0.1rem;
+			}
 
-.feature-list .item-content p {
-    color: rgba(255, 255, 255, 0.8);
-    margin: 0 0 1rem 0;
-    font-size: 0.9rem;
-}
+			.feature-list .item-content p {
+				color: rgba(255, 255, 255, 0.8);
+				margin: 0 0 1rem 0;
+				font-size: 0.9rem;
+			}
 
-/* Style the link in the blogs section */
-#blogs .feature-list .item-content a {
-    color: #ffffff;
-    font-size: 1.1rem;
-    font-weight: 600;
-    letter-spacing: 0.1rem;
-    border-bottom: none;
-    line-height: 1.4;
-}
+			/* Style the link in the blogs section */
+			#blogs .feature-list .item-content a {
+				color: #ffffff;
+				font-size: 1.1rem;
+				font-weight: 600;
+				letter-spacing: 0.1rem;
+				border-bottom: none;
+				line-height: 1.4;
+			}
 
-#blogs .feature-list .item-content a:hover {
-    color: #dddddd;
-}
+			#blogs .feature-list .item-content a:hover {
+				color: #dddddd;
+			}
 
-/* Style the project link/button */
-#projects .feature-list .item-content a {
-    border-bottom: none;
-    /* This will automatically use your existing .button.small style */
-}
+			/* Style the project link/button */
+			#projects .feature-list .item-content a {
+				border-bottom: none;
+				/* This will automatically use your existing .button.small style */
+			}
 
-/* ---- Responsive Grid for Mobile ---- */
-@media screen and (max-width: 736px) {
-    .feature-list {
-        grid-template-columns: 1fr; /* Stack to one column on mobile */
-        gap: 1rem;
-    }
+			/* ---- Responsive Grid for Mobile ---- */
+			@media screen and (max-width: 736px) {
+				.feature-list {
+					grid-template-columns: 1fr; /* Stack to one column on mobile */
+					gap: 1rem;
+				}
 
-    .feature-list li img {
-        height: 200px; /* Adjust height for mobile */
-    }
-}
+				.feature-list li img {
+					height: 200px; /* Adjust height for mobile */
+				}
+			}
 
 			/* ---- Background colour: pure dark ---- */
 			html, body {
 				background-color: #0a0a0a !important;
 			}
 
-			/* ---- Article slide in ---- */
+			/* ==========================================
+			   BOX OPENING: BORDER INTERSECTS HEADING
+			   ========================================== */
 			#main article {
 				transform: translateX(-14px) !important;
 				opacity: 0 !important;
 				transition: opacity 0.4s ease, transform 0.4s ease !important;
 				position: relative;
-				overflow: visible !important;
+				padding: 3.5rem 2rem 2rem 2rem !important; /* Extra top padding so content clears the absolute heading */
 			}
+			
+			/* The drawing border */
+			#main article::before {
+				content: '';
+				position: absolute;
+				inset: 0;
+				border: 2px solid #06d6a0; /* Accent color */
+				border-radius: 4px;
+				clip-path: inset(0 100% 0 0);
+				transition: clip-path 0.55s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
+				pointer-events: none;
+				z-index: 100;
+			}
+			
 			#main article.active {
 				transform: translateX(0) !important;
 				opacity: 1 !important;
 			}
-
-			/* SVG tracer injected by JS — sits on top of article */
-			.border-tracer {
-				position: absolute;
-				inset: -2px;
-				width: calc(100% + 4px);
-				height: calc(100% + 4px);
-				pointer-events: none;
-				z-index: 200;
-				overflow: visible;
-			}
-			.border-tracer rect {
-				fill: none;
-				stroke: #06d6a0;
-				stroke-width: 2;
-				stroke-linecap: square;
+			#main article.active::before {
+				clip-path: inset(0 0% 0 0);
 			}
 
-			/* Heading underline that appears after trace completes */
+			/* Positioning the heading directly ON the border line */
 			#main article h2.major {
-				position: relative;
+				position: absolute;
+				top: -16px; /* Pulls the heading up to sit exactly on the top border */
+				left: 2rem;
+				margin: 0 !important;
+				padding: 0 15px; /* Creates the visual "cut" in the border */
+				background-color: #0a0a0a; /* Matches dark background to hide the line behind it */
+				font-weight: 700;
+				z-index: 101; /* Must sit above the border pseudo-element */
+				
+				/* Subtle slide-in effect for the text itself */
+				opacity: 0;
+				transform: translateY(10px);
+				transition: opacity 0.4s ease 0.4s, transform 0.4s ease 0.4s;
 			}
+
+			#main article.active h2.major {
+				opacity: 1;
+				transform: translateY(0);
+			}
+
+			/* Hide the template's default bottom border on headings */
 			#main article h2.major::after {
-				content: '';
-				display: block;
-				height: 2px;
-				background: #06d6a0;
-				border-radius: 1px;
-				margin-top: 6px;
-				width: 0;
-				transition: width 0.45s cubic-bezier(0.4, 0, 0.2, 1) 0.75s;
-			}
-			#main article.active h2.major::after {
-				width: 100%;
+				display: none !important; 
 			}
 
 			/* ---- Smaller font for article body text ---- */
@@ -587,158 +598,78 @@
 		<script src="assets/js/breakpoints.min.js" defer></script>
 		<script src="assets/js/util.js" defer></script>
 		<script src="assets/js/main.js" defer></script>
-
+			
+		<script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
 		<script>
-		/* SVG perimeter tracer — draws clockwise from top-left, back to origin */
-		function traceBorder(article) {
-			var existing = article.querySelector('.border-tracer');
-			if (existing) existing.remove();
-
-			var w = article.offsetWidth + 4;
-			var h = article.offsetHeight + 4;
-			var perimeter = 2 * (w + h);
-
-			var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-			svg.setAttribute('class', 'border-tracer');
-			svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
-			svg.setAttribute('width', w);
-			svg.setAttribute('height', h);
-
-			var rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-			rect.setAttribute('x', '1');
-			rect.setAttribute('y', '1');
-			rect.setAttribute('width', w - 2);
-			rect.setAttribute('height', h - 2);
-			rect.setAttribute('rx', '4');
-			rect.setAttribute('stroke-dasharray', perimeter);
-			rect.setAttribute('stroke-dashoffset', perimeter);
-
-			svg.appendChild(rect);
-			article.appendChild(svg);
-
-			/* animate: draw full perimeter then retract back to origin */
-			var start = null;
-			var drawDur = 700;
-			var holdDur = 120;
-			var eraseDur = 500;
-			var total = drawDur + holdDur + eraseDur;
-
-			function step(ts) {
-				if (!start) start = ts;
-				var elapsed = ts - start;
-
-				if (elapsed <= drawDur) {
-					/* drawing phase: dashoffset from perimeter → 0 */
-					var progress = elapsed / drawDur;
-					var ease = 1 - Math.pow(1 - progress, 3);
-					rect.setAttribute('stroke-dashoffset', perimeter * (1 - ease));
-				} else if (elapsed <= drawDur + holdDur) {
-					/* hold fully drawn */
-					rect.setAttribute('stroke-dashoffset', 0);
-				} else if (elapsed <= total) {
-					/* erase phase: shrink from tail — increase offset AND shrink array */
-					var progress = (elapsed - drawDur - holdDur) / eraseDur;
-					var ease = progress < 0.5 ? 2 * progress * progress : 1 - Math.pow(-2 * progress + 2, 2) / 2;
-					rect.setAttribute('stroke-dasharray', perimeter * (1 - ease));
-					rect.setAttribute('stroke-dashoffset', 0);
-				} else {
-					svg.remove();
-					return;
+			tsParticles.load("particles-js", {
+			background: { color: { value: "#0a0a0a" } },
+			fpsLimit: 60,
+			interactivity: {
+				events: {
+					onHover: { enable: true, mode: "repulse" },
+					onClick: { enable: true, mode: "push" },
+					resize: true
+				},
+				modes: {
+					repulse: { distance: 130, duration: 0.3 },
+					push: { quantity: 2 }
 				}
-				requestAnimationFrame(step);
-			}
-			requestAnimationFrame(step);
-		}
-
-		/* MutationObserver watches for .active class being added to articles */
-		document.addEventListener('DOMContentLoaded', function() {
-			var articles = document.querySelectorAll('#main article');
-			articles.forEach(function(article) {
-				var observer = new MutationObserver(function(mutations) {
-					mutations.forEach(function(m) {
-						if (m.attributeName === 'class') {
-							if (article.classList.contains('active')) {
-								setTimeout(function() { traceBorder(article); }, 50);
-							}
+			},
+			particles: {
+				color: {
+					value: ["#ffffff", "#06d6a0", "#7dd3fc", "#c4b5fd", "#f4c542"]
+				},
+				shape: {
+					type: "char",
+					options: {
+						char: {
+							value: ["0", "1", "π", "∑", "σ", "μ", "∂", "∫", "%", "∞", "λ", "∇", "Δ"],
+							font: "monospace",
+							style: "",
+							weight: "700",
+							fill: true
 						}
-					});
-				});
-				observer.observe(article, { attributes: true });
-			});
+					}
+				},
+				links: {
+					enable: true,
+					distance: 130,
+					color: "#06a07a",
+					opacity: 0.35,
+					width: 1.2,
+					triangles: { enable: false }
+				},
+				move: {
+					direction: "none",
+					enable: true,
+					outModes: { default: "out" },
+					random: true,
+					speed: 2.8,
+					straight: false
+				},
+				number: {
+					value: 65,
+					density: { enable: true, area: 900 }
+				},
+				opacity: {
+					value: 0.9,
+					random: { enable: true, minimumValue: 0.5 },
+					animation: { enable: true, speed: 0.8, minimumValue: 0.4, sync: false }
+				},
+				size: {
+					value: { min: 10, max: 20 },
+					random: true
+				},
+				rotate: {
+					value: { min: 0, max: 360 },
+					random: true,
+					direction: "random",
+					animation: { enable: true, speed: 5, sync: false }
+				}
+			},
+			detectRetina: true
 		});
 		</script>
-			
-			<script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
-			<script>
-				tsParticles.load("particles-js", {
-				background: { color: { value: "#0a0a0a" } },
-				fpsLimit: 60,
-				interactivity: {
-					events: {
-						onHover: { enable: true, mode: "repulse" },
-						onClick: { enable: true, mode: "push" },
-						resize: true
-					},
-					modes: {
-						repulse: { distance: 130, duration: 0.3 },
-						push: { quantity: 2 }
-					}
-				},
-				particles: {
-					color: {
-						value: ["#ffffff", "#06d6a0", "#7dd3fc", "#c4b5fd", "#f4c542"]
-					},
-					shape: {
-						type: "char",
-						options: {
-							char: {
-								value: ["0", "1", "π", "∑", "σ", "μ", "∂", "∫", "%", "∞", "λ", "∇", "Δ"],
-								font: "monospace",
-								style: "",
-								weight: "700",
-								fill: true
-							}
-						}
-					},
-					links: {
-						enable: true,
-						distance: 130,
-						color: "#06a07a",
-						opacity: 0.35,
-						width: 1.2,
-						triangles: { enable: false }
-					},
-					move: {
-						direction: "none",
-						enable: true,
-						outModes: { default: "out" },
-						random: true,
-						speed: 2.8,
-						straight: false
-					},
-					number: {
-						value: 65,
-						density: { enable: true, area: 900 }
-					},
-					opacity: {
-						value: 0.9,
-						random: { enable: true, minimumValue: 0.5 },
-						animation: { enable: true, speed: 0.8, minimumValue: 0.4, sync: false }
-					},
-					size: {
-						value: { min: 10, max: 20 },
-						random: true
-					},
-					rotate: {
-						value: { min: 0, max: 360 },
-						random: true,
-						direction: "random",
-						animation: { enable: true, speed: 5, sync: false }
-					}
-				},
-				detectRetina: true
-			});
-			</script>
 
 	</body>
 </html>
