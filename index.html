@@ -8,9 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 
     <link rel="icon" type="image/png" href="images/name.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/main.css" />
     <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
     <style>
@@ -135,33 +132,36 @@
     }
 }
 
+			/* ---- Light background — header text colours ---- */
+			#header .content .inner h1,
+			#header .content .inner p,
+			#header .content p {
+				color: #0d2a4a !important;
+			}
+			#header .logo .icon:before {
+				color: #0d2a4a !important;
+			}
+			#header > * > :before {
+				background: rgba(13,42,74,0.25) !important;
+			}
+			#footer .copyright {
+				color: rgba(13,42,74,0.55) !important;
+			}
+
 			/* ---- Background colour override ---- */
 			html, body {
-				background-color: #0d1117 !important;
+				background-color: #EDF3FA !important;
 			}
 
-			/* ---- JetBrains Mono globally ---- */
-			*, body, input, select, textarea, button {
-				font-family: 'JetBrains Mono', monospace !important;
-			}
-
-			/* ---- Name / heading size tweaks for mono font ---- */
-			#header .content .inner h1 {
-				letter-spacing: 0.15em;
-				font-weight: 700;
-			}
-			#header .content .inner p {
-				letter-spacing: 0.04em;
-				font-size: 0.82em;
-			}
-
-			/* ---- Box opening: Border draw reveal (D) ---- */
+			/* ---- Box opening: Border sweeps into heading underline ---- */
 			#main article {
-				transform: translateX(-12px) !important;
+				transform: translateX(-14px) !important;
 				opacity: 0 !important;
-				transition: opacity 0.45s ease, transform 0.45s ease !important;
+				transition: opacity 0.4s ease, transform 0.4s ease !important;
 				position: relative;
 			}
+
+			/* Full border draws on open, then fades leaving only heading underline */
 			#main article::before {
 				content: '';
 				position: absolute;
@@ -169,16 +169,49 @@
 				border: 2px solid #06d6a0;
 				border-radius: 4px;
 				clip-path: inset(0 100% 0 0);
-				transition: clip-path 0.55s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
+				transition: clip-path 0.55s cubic-bezier(0.4, 0, 0.2, 1) 0.05s,
+				            opacity 0.4s ease 0.7s;
 				pointer-events: none;
 				z-index: 100;
+				opacity: 1;
 			}
+
 			#main article.active {
 				transform: translateX(0) !important;
 				opacity: 1 !important;
 			}
 			#main article.active::before {
 				clip-path: inset(0 0% 0 0);
+				opacity: 0;
+			}
+
+			/* Heading underline that the border "lands" into */
+			#main article h2.major {
+				position: relative;
+			}
+			#main article h2.major::after {
+				content: '';
+				display: block;
+				height: 2px;
+				background: #06d6a0;
+				border-radius: 1px;
+				margin-top: 6px;
+				width: 0;
+				transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.5s;
+			}
+			#main article.active h2.major::after {
+				width: 100%;
+			}
+
+			/* ---- Smaller font for article body text ---- */
+			#main article p,
+			#main article li,
+			#main article h4 {
+				font-size: 0.82em !important;
+				line-height: 1.7;
+			}
+			#main article h3 {
+				font-size: 1em !important;
 			}
 
 			/* ---- Box / Panel opening style ---- */
@@ -199,13 +232,13 @@
 			#header nav ul li a {
 				display: inline-block;
 				padding: 0.55em 1.4em !important;
-				border: 1px solid rgba(255,255,255,0.25) !important;
+				border: 1px solid rgba(13,42,74,0.3) !important;
 				border-radius: 4px !important;
 				font-size: 0.72em !important;
 				letter-spacing: 0.18em !important;
 				font-weight: 600 !important;
-				color: rgba(255,255,255,0.85) !important;
-				background: rgba(255,255,255,0.04) !important;
+				color: rgba(13,42,74,0.85) !important;
+				background: rgba(13,42,74,0.05) !important;
 				transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease, transform 0.15s ease !important;
 				text-transform: uppercase;
 				position: relative;
@@ -224,9 +257,9 @@
 				transition: width 0.25s ease;
 			}
 			#header nav ul li a:hover {
-				background: rgba(255,255,255,0.1) !important;
-				border-color: rgba(255,255,255,0.55) !important;
-				color: #ffffff !important;
+				background: rgba(13,42,74,0.1) !important;
+				border-color: rgba(13,42,74,0.55) !important;
+				color: #0d2a4a !important;
 				transform: translateY(-2px);
 			}
 			#header nav ul li a:hover::after {
@@ -576,7 +609,7 @@
 			<script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
 			<script>
 				tsParticles.load("particles-js", {
-				background: { color: { value: "#0d1117" } },
+				background: { color: { value: "#EDF3FA" } },
 				fpsLimit: 60,
 				interactivity: {
 					events: {
@@ -585,32 +618,32 @@
 						resize: true
 					},
 					modes: {
-						repulse: { distance: 130, duration: 0.4 },
+						repulse: { distance: 130, duration: 0.3 },
 						push: { quantity: 2 }
 					}
 				},
 				particles: {
 					color: {
-						value: ["#ffffff", "#06d6a0", "#7dd3fc", "#c4b5fd", "#d4537e"]
+						value: ["#0d2a4a", "#06a07a", "#1a6fb5", "#7c3aed", "#be185d"]
 					},
 					shape: {
 						type: "char",
 						options: {
 							char: {
 								value: ["0", "1", "π", "∑", "σ", "μ", "∂", "∫", "%", "∞", "λ", "∇", "Δ"],
-								font: "JetBrains Mono, monospace",
+								font: "monospace",
 								style: "",
-								weight: "400",
+								weight: "700",
 								fill: true
 							}
 						}
 					},
 					links: {
 						enable: true,
-						distance: 140,
-						color: "#06d6a0",
-						opacity: 0.25,
-						width: 0.8,
+						distance: 130,
+						color: "#06a07a",
+						opacity: 0.35,
+						width: 1.2,
 						triangles: { enable: false }
 					},
 					move: {
@@ -618,27 +651,27 @@
 						enable: true,
 						outModes: { default: "out" },
 						random: true,
-						speed: 1.6,
+						speed: 2.8,
 						straight: false
 					},
 					number: {
-						value: 60,
+						value: 65,
 						density: { enable: true, area: 900 }
 					},
 					opacity: {
-						value: 0.7,
-						random: { enable: true, minimumValue: 0.2 },
-						animation: { enable: true, speed: 0.6, minimumValue: 0.15, sync: false }
+						value: 0.9,
+						random: { enable: true, minimumValue: 0.5 },
+						animation: { enable: true, speed: 0.8, minimumValue: 0.4, sync: false }
 					},
 					size: {
-						value: { min: 9, max: 20 },
+						value: { min: 10, max: 20 },
 						random: true
 					},
 					rotate: {
 						value: { min: 0, max: 360 },
 						random: true,
 						direction: "random",
-						animation: { enable: true, speed: 4, sync: false }
+						animation: { enable: true, speed: 5, sync: false }
 					}
 				},
 				detectRetina: true
