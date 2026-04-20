@@ -7,7 +7,10 @@
     <meta name="description" content="Kuldip Shendge — Data Analyst and AI professional specialising in SQL, Python, Power BI, and data visualisation. Explore my projects, work experience, and blog." />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 
-    <link rel="icon" type="image/png" href="images/name.png"> 
+    <link rel="icon" type="image/png" href="images/name.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/main.css" />
     <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
     <style>
@@ -132,18 +135,90 @@
     }
 }
 
-			/* small helper for the name logo */
+			/* ---- JetBrains Mono globally ---- */
+			*, body, input, select, textarea, button {
+				font-family: 'JetBrains Mono', monospace !important;
+			}
+
+			/* ---- Name / heading size tweaks for mono font ---- */
+			#header .content .inner h1 {
+				letter-spacing: 0.15em;
+				font-weight: 700;
+			}
+			#header .content .inner p {
+				letter-spacing: 0.04em;
+				font-size: 0.82em;
+			}
+
+			/* ---- Modernised nav boxes ---- */
+			#header nav ul {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 8px;
+				justify-content: center;
+				padding: 0;
+				list-style: none;
+			}
+			#header nav ul li {
+				border: none !important;
+			}
+			#header nav ul li:first-child {
+				border: none !important;
+			}
+			#header nav ul li a {
+				display: inline-block;
+				padding: 0.55em 1.4em !important;
+				border: 1px solid rgba(255,255,255,0.25) !important;
+				border-radius: 4px !important;
+				font-size: 0.72em !important;
+				letter-spacing: 0.18em !important;
+				font-weight: 600 !important;
+				color: rgba(255,255,255,0.85) !important;
+				background: rgba(255,255,255,0.04) !important;
+				transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease, transform 0.15s ease !important;
+				text-transform: uppercase;
+				position: relative;
+			}
+			#header nav ul li a::after {
+				content: '';
+				display: block;
+				position: absolute;
+				bottom: 0;
+				left: 50%;
+				transform: translateX(-50%);
+				width: 0;
+				height: 2px;
+				background: #d4537e;
+				border-radius: 2px;
+				transition: width 0.25s ease;
+			}
+			#header nav ul li a:hover {
+				background: rgba(255,255,255,0.1) !important;
+				border-color: rgba(255,255,255,0.55) !important;
+				color: #ffffff !important;
+				transform: translateY(-2px);
+			}
+			#header nav ul li a:hover::after {
+				width: 60%;
+			}
+			#header nav ul li a:active {
+				transform: translateY(0px);
+				background: rgba(212,83,126,0.15) !important;
+				border-color: #d4537e !important;
+			}
+
+			/* ---- small helper for the name logo ---- */
 			.name-logo {
 				vertical-align: middle;
 				width: 70px;
 				height: auto;
-				/* whiten the logo visually */
 				filter: brightness(6) grayscale(100%) contrast(200%);
 				transition: filter 0.3s ease;
 				-webkit-filter: brightness(6) grayscale(100%) contrast(200%);
 				mix-blend-mode: screen;
 			}
 			.name-logo:hover { filter: brightness(8) grayscale(100%) contrast(220%); }
+
 			/* Center the icons list */
 			ul.icons.special {
 				text-align: center;
@@ -469,71 +544,74 @@
 			
 			<script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
 			<script>
-				/* Enhanced particles configuration:
-				- more particles, animated size & opacity
-				- slight glow via stroke and higher opacity lines
-				- hover interactivity: repulse
-				*/
-				tsParticles.load("particles-js", {
-					background: { color: { value: "#111316" } },
-					fpsLimit: 60,
-					interactivity: {
-						events: {
-							onHover: { enable: true, mode: "repulse" },
-							onClick: { enable: true, mode: "push" },
-							resize: true
-						},
-						modes: {
-							repulse: { distance: 140, duration: 0.6 },
-							push: { quantity: 4 }
-						}
+				/* Network graph / data pipeline particles
+			   - Distinct hub nodes (large) + relay nodes (small)
+			   - Strong directional links like a pipeline
+			   - Hover: grab mode highlights connections
+			   - Accent colours: white hubs, teal links, pink highlights
+			*/
+			tsParticles.load("particles-js", {
+				background: { color: { value: "#111316" } },
+				fpsLimit: 60,
+				interactivity: {
+					events: {
+						onHover: { enable: true, mode: "grab" },
+						onClick: { enable: true, mode: "push" },
+						resize: true
 					},
-					particles: {
-						color: { value: ["#ffffff", "#e6e6ff", "#ffd6e6"] },
-						links: {
-							color: "#ffffff",
-							distance: 160,
-							enable: true,
-							opacity: 0.18,
-							width: 1.1
+					modes: {
+						grab: {
+							distance: 200,
+							links: { opacity: 0.7, color: "#d4537e" }
 						},
-						collisions: { enable: false },
-						move: {
-							direction: "none",
-							enable: true,
-							outModes: { default: "out" },
-							random: true,
-							speed: 1.5,
-							straight: false
-						},
-						number: {
-							value: 110,
-							density: { enable: true, area: 900 }
-						},
-						opacity: {
-							value: 0.65,
-							random: { enable: true, minimumValue: 0.2 },
-							anim: { enable: true, speed: 0.6, opacity_min: 0.15, sync: false }
-						},
-						shape: {
-							type: ["circle", "triangle"],
-							options: {}
-						},
-						size: {
-							value: { min: 0.8, max: 4.5 },
-							random: true,
-							anim: { enable: true, speed: 4, size_min: 0.6, sync: false }
-						},
-						twinkle: {
-							particles: {
-								enabled: true,
-								frequency: 0.007,
-								opacity: 0.5
-							}
-						}
+						push: { quantity: 2 }
+					}
+				},
+				particles: {
+					color: {
+						value: ["#ffffff", "#ffffff", "#7dd3fc", "#d4537e", "#a5f3fc"]
 					},
-					detectRetina: true
-				});
+					links: {
+						color: "#4a90a4",
+						distance: 160,
+						enable: true,
+						opacity: 0.35,
+						width: 1,
+						triangles: { enable: false }
+					},
+					collisions: { enable: false },
+					move: {
+						direction: "none",
+						enable: true,
+						outModes: { default: "bounce" },
+						random: false,
+						speed: 0.6,
+						straight: false
+					},
+					number: {
+						value: 70,
+						density: { enable: true, area: 900 }
+					},
+					opacity: {
+						value: 0.85,
+						random: { enable: true, minimumValue: 0.3 }
+					},
+					shape: { type: "circle" },
+					size: {
+						value: { min: 1.5, max: 7 },
+						random: true
+					},
+					twinkle: {
+						particles: {
+							enabled: true,
+							frequency: 0.012,
+							opacity: 1,
+							color: { value: "#d4537e" }
+						}
+					}
+				},
+				detectRetina: true
+			});
 			</script>
 
 	</body>
