@@ -132,60 +132,42 @@
     }
 }
 
-			/* ---- Light background — header text colours ---- */
-			#header .content .inner h1,
-			#header .content .inner p,
-			#header .content p {
-				color: #0d2a4a !important;
-			}
-			#header .logo .icon:before {
-				color: #0d2a4a !important;
-			}
-			#header > * > :before {
-				background: rgba(13,42,74,0.25) !important;
-			}
-			#footer .copyright {
-				color: rgba(13,42,74,0.55) !important;
-			}
-
-			/* ---- Background colour override ---- */
+			/* ---- Background colour: pure dark ---- */
 			html, body {
-				background-color: #EDF3FA !important;
+				background-color: #0a0a0a !important;
 			}
 
-			/* ---- Box opening: Border sweeps into heading underline ---- */
+			/* ---- Article slide in ---- */
 			#main article {
 				transform: translateX(-14px) !important;
 				opacity: 0 !important;
 				transition: opacity 0.4s ease, transform 0.4s ease !important;
 				position: relative;
+				overflow: visible !important;
 			}
-
-			/* Full border draws on open, then fades leaving only heading underline */
-			#main article::before {
-				content: '';
-				position: absolute;
-				inset: 0;
-				border: 2px solid #06d6a0;
-				border-radius: 4px;
-				clip-path: inset(0 100% 0 0);
-				transition: clip-path 0.55s cubic-bezier(0.4, 0, 0.2, 1) 0.05s,
-				            opacity 0.4s ease 0.7s;
-				pointer-events: none;
-				z-index: 100;
-				opacity: 1;
-			}
-
 			#main article.active {
 				transform: translateX(0) !important;
 				opacity: 1 !important;
 			}
-			#main article.active::before {
-				clip-path: inset(0 0% 0 0);
-				opacity: 0;
+
+			/* SVG tracer injected by JS — sits on top of article */
+			.border-tracer {
+				position: absolute;
+				inset: -2px;
+				width: calc(100% + 4px);
+				height: calc(100% + 4px);
+				pointer-events: none;
+				z-index: 200;
+				overflow: visible;
+			}
+			.border-tracer rect {
+				fill: none;
+				stroke: #06d6a0;
+				stroke-width: 2;
+				stroke-linecap: square;
 			}
 
-			/* Heading underline that the border "lands" into */
+			/* Heading underline that appears after trace completes */
 			#main article h2.major {
 				position: relative;
 			}
@@ -197,7 +179,7 @@
 				border-radius: 1px;
 				margin-top: 6px;
 				width: 0;
-				transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.5s;
+				transition: width 0.45s cubic-bezier(0.4, 0, 0.2, 1) 0.75s;
 			}
 			#main article.active h2.major::after {
 				width: 100%;
@@ -232,13 +214,13 @@
 			#header nav ul li a {
 				display: inline-block;
 				padding: 0.55em 1.4em !important;
-				border: 1px solid rgba(13,42,74,0.3) !important;
+				border: 1px solid rgba(255,255,255,0.25) !important;
 				border-radius: 4px !important;
 				font-size: 0.72em !important;
 				letter-spacing: 0.18em !important;
 				font-weight: 600 !important;
-				color: rgba(13,42,74,0.85) !important;
-				background: rgba(13,42,74,0.05) !important;
+				color: rgba(255,255,255,0.85) !important;
+				background: rgba(255,255,255,0.04) !important;
 				transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease, transform 0.15s ease !important;
 				text-transform: uppercase;
 				position: relative;
@@ -257,9 +239,9 @@
 				transition: width 0.25s ease;
 			}
 			#header nav ul li a:hover {
-				background: rgba(13,42,74,0.1) !important;
-				border-color: rgba(13,42,74,0.55) !important;
-				color: #0d2a4a !important;
+				background: rgba(255,255,255,0.1) !important;
+				border-color: rgba(255,255,255,0.55) !important;
+				color: #ffffff !important;
 				transform: translateY(-2px);
 			}
 			#header nav ul li a:hover::after {
@@ -601,15 +583,95 @@
 			</div>
 
 		<script src="assets/js/jquery.min.js" defer></script>
-			<script src="assets/js/browser.min.js" defer></script>
-			<script src="assets/js/breakpoints.min.js" defer></script>
-			<script src="assets/js/util.js" defer></script>
-			<script src="assets/js/main.js" defer></script>
+		<script src="assets/js/browser.min.js" defer></script>
+		<script src="assets/js/breakpoints.min.js" defer></script>
+		<script src="assets/js/util.js" defer></script>
+		<script src="assets/js/main.js" defer></script>
+
+		<script>
+		/* SVG perimeter tracer — draws clockwise from top-left, back to origin */
+		function traceBorder(article) {
+			var existing = article.querySelector('.border-tracer');
+			if (existing) existing.remove();
+
+			var w = article.offsetWidth + 4;
+			var h = article.offsetHeight + 4;
+			var perimeter = 2 * (w + h);
+
+			var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+			svg.setAttribute('class', 'border-tracer');
+			svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+			svg.setAttribute('width', w);
+			svg.setAttribute('height', h);
+
+			var rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+			rect.setAttribute('x', '1');
+			rect.setAttribute('y', '1');
+			rect.setAttribute('width', w - 2);
+			rect.setAttribute('height', h - 2);
+			rect.setAttribute('rx', '4');
+			rect.setAttribute('stroke-dasharray', perimeter);
+			rect.setAttribute('stroke-dashoffset', perimeter);
+
+			svg.appendChild(rect);
+			article.appendChild(svg);
+
+			/* animate: draw full perimeter then retract back to origin */
+			var start = null;
+			var drawDur = 700;
+			var holdDur = 120;
+			var eraseDur = 500;
+			var total = drawDur + holdDur + eraseDur;
+
+			function step(ts) {
+				if (!start) start = ts;
+				var elapsed = ts - start;
+
+				if (elapsed <= drawDur) {
+					/* drawing phase: dashoffset from perimeter → 0 */
+					var progress = elapsed / drawDur;
+					var ease = 1 - Math.pow(1 - progress, 3);
+					rect.setAttribute('stroke-dashoffset', perimeter * (1 - ease));
+				} else if (elapsed <= drawDur + holdDur) {
+					/* hold fully drawn */
+					rect.setAttribute('stroke-dashoffset', 0);
+				} else if (elapsed <= total) {
+					/* erase phase: shrink from tail — increase offset AND shrink array */
+					var progress = (elapsed - drawDur - holdDur) / eraseDur;
+					var ease = progress < 0.5 ? 2 * progress * progress : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+					rect.setAttribute('stroke-dasharray', perimeter * (1 - ease));
+					rect.setAttribute('stroke-dashoffset', 0);
+				} else {
+					svg.remove();
+					return;
+				}
+				requestAnimationFrame(step);
+			}
+			requestAnimationFrame(step);
+		}
+
+		/* MutationObserver watches for .active class being added to articles */
+		document.addEventListener('DOMContentLoaded', function() {
+			var articles = document.querySelectorAll('#main article');
+			articles.forEach(function(article) {
+				var observer = new MutationObserver(function(mutations) {
+					mutations.forEach(function(m) {
+						if (m.attributeName === 'class') {
+							if (article.classList.contains('active')) {
+								setTimeout(function() { traceBorder(article); }, 50);
+							}
+						}
+					});
+				});
+				observer.observe(article, { attributes: true });
+			});
+		});
+		</script>
 			
 			<script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
 			<script>
 				tsParticles.load("particles-js", {
-				background: { color: { value: "#EDF3FA" } },
+				background: { color: { value: "#0a0a0a" } },
 				fpsLimit: 60,
 				interactivity: {
 					events: {
@@ -624,7 +686,7 @@
 				},
 				particles: {
 					color: {
-						value: ["#0d2a4a", "#06a07a", "#1a6fb5", "#7c3aed", "#be185d"]
+						value: ["#ffffff", "#06d6a0", "#7dd3fc", "#c4b5fd", "#f4c542"]
 					},
 					shape: {
 						type: "char",
