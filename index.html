@@ -8,171 +8,184 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 
     <link rel="icon" type="image/png" href="images/name.png">
+    
+    <!-- FONT OPTIONS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+    <!-- 1. Fira Code (Technical/Coding Mono - Current Default) -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap" rel="stylesheet">
+    <!-- 2. Inter (Ultra-clean, modern Sans-Serif) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&display=swap" rel="stylesheet">
+    <!-- 3. Space Grotesk (Slightly futuristic, geometric Sans) -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="assets/css/main.css" />
     <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
     <style>
-			/* ---- Grid Layout for Projects & Blogs ---- */
-
-/* 1. Set up the grid container */
-.feature-list {
-    list-style: none;
-    padding-left: 0;
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* Creates two equal columns */
-    gap: 1.5rem; /* Space between grid items */
-}
-
-/* 2. Style each grid item (the <li>) */
-.feature-list li {
-    position: relative; /* Crucial for positioning the hover content */
-    border-radius: 6px;
-    overflow: hidden;   /* Hides the content that overflows */
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    
-    /* Remove old list styles */
-    padding: 0;
-    border-top: 0;
-    display: block; /* Override the old 'display: flex' */
-}
-
-/* 3. Style the image to fill the grid item */
-.feature-list li img {
-    display: block;
-    width: 100%;
-    height: 250px; /* Give the card a fixed height */
-    object-fit: cover;
-    border-radius: 0;
-    margin-right: 0;
-    transition: transform 0.3s ease;
-}
-
-/* 4. Style the hover content overlay */
-.feature-list .item-content {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    
-    /* Overlay background */
-    background-color: rgba(27, 31, 34, 0.9); /* Dark overlay */
-    
-    /* Hide it by default */
-    opacity: 0;
-    visibility: hidden;
-    
-    /* Smooth transition */
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-    
-    /* Center the text inside */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-    text-align: center;
-    
-    /* Remove old list styles */
-    flex-grow: 0;
-}
-
-/* 5. The hover effect */
-.feature-list li:hover .item-content {
-    opacity: 1;
-    visibility: visible;
-}
-
-/* Optional: Add a slight zoom to the image on hover */
-.feature-list li:hover img {
-    transform: scale(1.05);
-}
-
-/* 6. Style the text on the overlay */
-.feature-list .item-content h4 {
-    color: #ffffff;
-    margin: 0 0 0.5rem 0;
-    letter-spacing: 0.1rem;
-}
-
-.feature-list .item-content p {
-    color: rgba(255, 255, 255, 0.8);
-    margin: 0 0 1rem 0;
-    font-size: 0.9rem;
-}
-
-/* Style the link in the blogs section */
-#blogs .feature-list .item-content a {
-    color: #ffffff;
-    font-size: 1.1rem;
-    font-weight: 600;
-    letter-spacing: 0.1rem;
-    border-bottom: none;
-    line-height: 1.4;
-}
-
-#blogs .feature-list .item-content a:hover {
-    color: #dddddd;
-}
-
-/* Style the project link/button */
-#projects .feature-list .item-content a {
-    border-bottom: none;
-    /* This will automatically use your existing .button.small style */
-}
-
-/* ---- Responsive Grid for Mobile ---- */
-@media screen and (max-width: 736px) {
-    .feature-list {
-        grid-template-columns: 1fr; /* Stack to one column on mobile */
-        gap: 1rem;
-    }
-
-    .feature-list li img {
-        height: 200px; /* Adjust height for mobile */
-    }
-}
-
-			/* ---- Background colour override ---- */
-			html, body {
-				background-color: #0d1117 !important;
+			/* ==========================================
+			   THEME VARIABLES & FONT SELECTION
+			   ========================================== */
+			:root {
+				--bg-color: #f7f8fa; /* Off-white / Soft Pearl */
+				--text-main: #333333;
+				--text-heading: #111111;
+				--text-muted: #555555;
+				--accent-color: #06d6a0;
+				
+				/* CHANGE YOUR FONT HERE: 
+				   Options: 'Fira Code', 'Inter', 'Space Grotesk' */
+				--main-font: 'Fira Code', monospace;
 			}
 
-			/* ---- JetBrains Mono globally ---- */
+			/* Apply Background and Font globally */
+			html, body, #wrapper, #main article {
+				background-color: var(--bg-color) !important;
+				color: var(--text-main) !important;
+			}
+
 			*, body, input, select, textarea, button {
-				font-family: 'JetBrains Mono', monospace !important;
+				font-family: var(--main-font) !important;
 			}
 
-			/* ---- Name / heading size tweaks for mono font ---- */
+			h1, h2, h3, h4, h5, h6, b, strong {
+				color: var(--text-heading) !important;
+			}
+			
+			p, li, i, em {
+				color: var(--text-muted) !important;
+			}
+
+			/* ---- Grid Layout for Projects & Blogs ---- */
+			.feature-list {
+				list-style: none;
+				padding-left: 0;
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 1.5rem;
+			}
+
+			.feature-list li {
+				position: relative;
+				border-radius: 6px;
+				overflow: hidden;
+				box-shadow: 0 4px 15px rgba(0,0,0,0.08); /* Lighter shadow for light theme */
+				padding: 0;
+				border-top: 0;
+				display: block;
+			}
+
+			.feature-list li img {
+				display: block;
+				width: 100%;
+				height: 250px;
+				object-fit: cover;
+				border-radius: 0;
+				margin-right: 0;
+				transition: transform 0.3s ease;
+			}
+
+			.feature-list .item-content {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background-color: rgba(27, 31, 34, 0.85); /* Kept dark overlay for contrast against white text */
+				opacity: 0;
+				visibility: hidden;
+				transition: opacity 0.3s ease, visibility 0.3s ease;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				padding: 1rem;
+				text-align: center;
+			}
+
+			.feature-list li:hover .item-content {
+				opacity: 1;
+				visibility: visible;
+			}
+
+			.feature-list li:hover img {
+				transform: scale(1.05);
+			}
+
+			.feature-list .item-content h4 {
+				color: #ffffff !important;
+				margin: 0 0 0.5rem 0;
+				letter-spacing: 0.1rem;
+			}
+
+			.feature-list .item-content p {
+				color: rgba(255, 255, 255, 0.8) !important;
+				margin: 0 0 1rem 0;
+				font-size: 0.9rem;
+			}
+
+			#blogs .feature-list .item-content a {
+				color: #ffffff;
+				font-size: 1.1rem;
+				font-weight: 600;
+				letter-spacing: 0.1rem;
+				border-bottom: none;
+				line-height: 1.4;
+			}
+
+			#blogs .feature-list .item-content a:hover {
+				color: var(--accent-color);
+			}
+
+			#projects .feature-list .item-content a {
+				border-bottom: none;
+				border-color: rgba(255,255,255,0.5) !important;
+				color: #fff !important;
+			}
+
+			@media screen and (max-width: 736px) {
+				.feature-list {
+					grid-template-columns: 1fr;
+					gap: 1rem;
+				}
+				.feature-list li img {
+					height: 200px;
+				}
+			}
+
+			/* ---- Name / heading size tweaks ---- */
 			#header .content .inner h1 {
-				letter-spacing: 0.15em;
+				letter-spacing: 0.1em;
 				font-weight: 700;
 			}
 			#header .content .inner p {
-				letter-spacing: 0.04em;
-				font-size: 0.82em;
+				letter-spacing: 0.02em;
+				font-size: 0.85em;
 			}
 
-			/* ---- Box opening: Border draw reveal (D) ---- */
+			/* ==========================================
+			   NEW BOX OPENING: BORDER INTERSECTS HEADING
+			   ========================================== */
 			#main article {
 				transform: translateX(-12px) !important;
 				opacity: 0 !important;
 				transition: opacity 0.45s ease, transform 0.45s ease !important;
 				position: relative;
+				padding: 3.5rem 2rem 2rem 2rem !important; /* Extra top padding so content clears the absolute heading */
 			}
+			
+			/* The drawing border */
 			#main article::before {
 				content: '';
 				position: absolute;
 				inset: 0;
-				border: 2px solid #06d6a0;
+				border: 2px solid var(--accent-color);
 				border-radius: 4px;
 				clip-path: inset(0 100% 0 0);
 				transition: clip-path 0.55s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
 				pointer-events: none;
 				z-index: 100;
 			}
+			
 			#main article.active {
 				transform: translateX(0) !important;
 				opacity: 1 !important;
@@ -181,7 +194,35 @@
 				clip-path: inset(0 0% 0 0);
 			}
 
-			/* ---- Box / Panel opening style ---- */
+			/* Positioning the heading directly ON the border line */
+			#main article h2.major {
+				position: absolute;
+				top: -15px; /* Pulls the heading up to sit exactly on the top border */
+				left: 2rem;
+				margin: 0 !important;
+				padding: 0 15px; /* Creates the visual "cut" in the border */
+				background-color: var(--bg-color); /* Matches page background to hide the line behind it */
+				color: var(--text-heading) !important;
+				font-weight: 700;
+				z-index: 101; /* Must sit above the border pseudo-element */
+				
+				/* Subtle slide-in effect for the text itself */
+				opacity: 0;
+				transform: translateY(10px);
+				transition: opacity 0.4s ease 0.4s, transform 0.4s ease 0.4s;
+			}
+
+			#main article.active h2.major {
+				opacity: 1;
+				transform: translateY(0);
+			}
+
+			/* Hide the template's default bottom border on headings */
+			#main article h2.major::after {
+				display: none !important; 
+			}
+
+			/* ---- Light Mode Navigation Styling ---- */
 			#header nav ul {
 				display: flex;
 				flex-wrap: wrap;
@@ -190,31 +231,28 @@
 				padding: 0;
 				list-style: none;
 			}
-			#header nav ul li {
-				border: none !important;
-			}
-			#header nav ul li:first-child {
-				border: none !important;
-			}
+			#header nav ul li { border: none !important; }
+			
 			#header nav ul li a {
 				display: inline-block;
 				padding: 0.55em 1.4em !important;
-				border: 1px solid rgba(255,255,255,0.25) !important;
+				border: 1px solid rgba(0,0,0,0.15) !important;
 				border-radius: 4px !important;
-				font-size: 0.72em !important;
-				letter-spacing: 0.18em !important;
+				font-size: 0.75em !important;
+				letter-spacing: 0.15em !important;
 				font-weight: 600 !important;
-				color: rgba(255,255,255,0.85) !important;
-				background: rgba(255,255,255,0.04) !important;
-				transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease, transform 0.15s ease !important;
+				color: var(--text-main) !important;
+				background: rgba(0,0,0,0.02) !important;
+				transition: all 0.25s ease !important;
 				text-transform: uppercase;
 				position: relative;
 			}
+			
 			#header nav ul li a::after {
 				content: '';
 				display: block;
 				position: absolute;
-				bottom: 0;
+				bottom: -1px;
 				left: 50%;
 				transform: translateX(-50%);
 				width: 0;
@@ -223,39 +261,40 @@
 				border-radius: 2px;
 				transition: width 0.25s ease;
 			}
+			
 			#header nav ul li a:hover {
-				background: rgba(255,255,255,0.1) !important;
-				border-color: rgba(255,255,255,0.55) !important;
-				color: #ffffff !important;
+				background: rgba(0,0,0,0.06) !important;
+				border-color: rgba(0,0,0,0.3) !important;
+				color: #000 !important;
 				transform: translateY(-2px);
 			}
-			#header nav ul li a:hover::after {
-				width: 60%;
-			}
+			
+			#header nav ul li a:hover::after { width: 60%; }
+			
 			#header nav ul li a:active {
 				transform: translateY(0px);
-				background: rgba(212,83,126,0.15) !important;
+				background: rgba(212,83,126,0.1) !important;
 				border-color: #d4537e !important;
 			}
 
-			/* ---- small helper for the name logo ---- */
+			/* Light mode button / link tweaks */
+			.button.primary { background-color: var(--accent-color) !important; color: #fff !important; }
+			ul.icons li a { color: var(--text-muted) !important; }
+			ul.icons li a:hover { color: var(--accent-color) !important; }
+
+			/* ---- Name logo dark version for light theme ---- */
 			.name-logo {
 				vertical-align: middle;
 				width: 70px;
 				height: auto;
-				filter: brightness(6) grayscale(100%) contrast(200%);
+				filter: brightness(0.2) opacity(0.85); /* Turns the white logo dark grey */
 				transition: filter 0.3s ease;
-				-webkit-filter: brightness(6) grayscale(100%) contrast(200%);
-				mix-blend-mode: screen;
+				mix-blend-mode: multiply;
 			}
-			.name-logo:hover { filter: brightness(8) grayscale(100%) contrast(220%); }
+			.name-logo:hover { filter: brightness(0) opacity(1); }
 
-			/* Center the icons list */
-			ul.icons.special {
-				text-align: center;
-			}
+			ul.icons.special { text-align: center; }
 
-			/* ensure particles layer is behind content but above background */
 			#bg { z-index: 0; }
 			#wrapper { z-index: 3; position: relative; }
 		</style>
@@ -576,7 +615,7 @@
 			<script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
 			<script>
 				tsParticles.load("particles-js", {
-				background: { color: { value: "#0d1117" } },
+				background: { color: { value: "#f7f8fa" } }, /* Matched to light theme body */
 				fpsLimit: 60,
 				interactivity: {
 					events: {
@@ -591,14 +630,14 @@
 				},
 				particles: {
 					color: {
-						value: ["#ffffff", "#06d6a0", "#7dd3fc", "#c4b5fd", "#d4537e"]
+						value: ["#222222", "#06d6a0", "#0077b6", "#6d28d9", "#d4537e"] /* Darker colors for light theme */
 					},
 					shape: {
 						type: "char",
 						options: {
 							char: {
 								value: ["0", "1", "π", "∑", "σ", "μ", "∂", "∫", "%", "∞", "λ", "∇", "Δ"],
-								font: "JetBrains Mono, monospace",
+								font: "Fira Code, monospace",
 								style: "",
 								weight: "400",
 								fill: true
@@ -609,7 +648,7 @@
 						enable: true,
 						distance: 140,
 						color: "#06d6a0",
-						opacity: 0.25,
+						opacity: 0.4,
 						width: 0.8,
 						triangles: { enable: false }
 					},
@@ -626,9 +665,9 @@
 						density: { enable: true, area: 900 }
 					},
 					opacity: {
-						value: 0.7,
-						random: { enable: true, minimumValue: 0.2 },
-						animation: { enable: true, speed: 0.6, minimumValue: 0.15, sync: false }
+						value: 0.8,
+						random: { enable: true, minimumValue: 0.4 },
+						animation: { enable: true, speed: 0.6, minimumValue: 0.25, sync: false }
 					},
 					size: {
 						value: { min: 9, max: 20 },
