@@ -12,12 +12,10 @@
     <!-- FONT OPTIONS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- 1. Fira Code (Technical/Coding Mono - Current Default) -->
+    <!-- Inter (Ultra-clean, modern Sans-Serif - Matches uploaded image) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Fira Code (Fallback) -->
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap" rel="stylesheet">
-    <!-- 2. Inter (Ultra-clean, modern Sans-Serif) -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&display=swap" rel="stylesheet">
-    <!-- 3. Space Grotesk (Slightly futuristic, geometric Sans) -->
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="assets/css/main.css" />
     <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
@@ -29,12 +27,11 @@
 				--bg-color: #f7f8fa; /* Off-white / Soft Pearl */
 				--text-main: #333333;
 				--text-heading: #111111;
-				--text-muted: #555555;
+				--text-muted: #4a4a4a;
 				--accent-color: #06d6a0;
 				
-				/* CHANGE YOUR FONT HERE: 
-				   Options: 'Fira Code', 'Inter', 'Space Grotesk' */
-				--main-font: 'Fira Code', monospace;
+				/* Set to Inter to match the uploaded screenshot */
+				--main-font: 'Inter', sans-serif;
 			}
 
 			/* Apply Background and Font globally */
@@ -45,10 +42,12 @@
 
 			*, body, input, select, textarea, button {
 				font-family: var(--main-font) !important;
+				line-height: 1.6;
 			}
 
 			h1, h2, h3, h4, h5, h6, b, strong {
 				color: var(--text-heading) !important;
+				font-weight: 700 !important;
 			}
 			
 			p, li, i, em {
@@ -90,7 +89,7 @@
 				left: 0;
 				width: 100%;
 				height: 100%;
-				background-color: rgba(27, 31, 34, 0.85); /* Kept dark overlay for contrast against white text */
+				background-color: rgba(27, 31, 34, 0.9); /* Dark overlay */
 				opacity: 0;
 				visibility: hidden;
 				transition: opacity 0.3s ease, visibility 0.3s ease;
@@ -98,7 +97,7 @@
 				flex-direction: column;
 				justify-content: center;
 				align-items: center;
-				padding: 1rem;
+				padding: 1.2rem;
 				text-align: center;
 			}
 
@@ -111,25 +110,28 @@
 				transform: scale(1.05);
 			}
 
+			/* Smaller font sizes in the boxes */
 			.feature-list .item-content h4 {
 				color: #ffffff !important;
-				margin: 0 0 0.5rem 0;
-				letter-spacing: 0.1rem;
+				margin: 0 0 0.4rem 0;
+				letter-spacing: 0.05rem;
+				font-size: 1.05rem; /* Reduced from default */
 			}
 
 			.feature-list .item-content p {
-				color: rgba(255, 255, 255, 0.8) !important;
-				margin: 0 0 1rem 0;
-				font-size: 0.9rem;
+				color: rgba(255, 255, 255, 0.85) !important;
+				margin: 0 0 0.8rem 0;
+				font-size: 0.82rem; /* Reduced from 0.9rem */
+				line-height: 1.4;
 			}
 
 			#blogs .feature-list .item-content a {
 				color: #ffffff;
-				font-size: 1.1rem;
+				font-size: 0.95rem; /* Reduced from 1.1rem */
 				font-weight: 600;
-				letter-spacing: 0.1rem;
+				letter-spacing: 0.05rem;
 				border-bottom: none;
-				line-height: 1.4;
+				line-height: 1.3;
 			}
 
 			#blogs .feature-list .item-content a:hover {
@@ -140,6 +142,8 @@
 				border-bottom: none;
 				border-color: rgba(255,255,255,0.5) !important;
 				color: #fff !important;
+				font-size: 0.75rem; /* Smaller button text */
+				padding: 0.4em 1em !important;
 			}
 
 			@media screen and (max-width: 736px) {
@@ -170,10 +174,9 @@
 				opacity: 0 !important;
 				transition: opacity 0.45s ease, transform 0.45s ease !important;
 				position: relative;
-				padding: 3.5rem 2rem 2rem 2rem !important; /* Extra top padding so content clears the absolute heading */
+				padding: 3.5rem 2rem 2rem 2rem !important;
 			}
 			
-			/* The drawing border */
 			#main article::before {
 				content: '';
 				position: absolute;
@@ -194,19 +197,16 @@
 				clip-path: inset(0 0% 0 0);
 			}
 
-			/* Positioning the heading directly ON the border line */
 			#main article h2.major {
 				position: absolute;
-				top: -15px; /* Pulls the heading up to sit exactly on the top border */
+				top: -16px;
 				left: 2rem;
 				margin: 0 !important;
-				padding: 0 15px; /* Creates the visual "cut" in the border */
-				background-color: var(--bg-color); /* Matches page background to hide the line behind it */
+				padding: 0 15px;
+				background-color: var(--bg-color);
 				color: var(--text-heading) !important;
 				font-weight: 700;
-				z-index: 101; /* Must sit above the border pseudo-element */
-				
-				/* Subtle slide-in effect for the text itself */
+				z-index: 101;
 				opacity: 0;
 				transform: translateY(10px);
 				transition: opacity 0.4s ease 0.4s, transform 0.4s ease 0.4s;
@@ -217,10 +217,7 @@
 				transform: translateY(0);
 			}
 
-			/* Hide the template's default bottom border on headings */
-			#main article h2.major::after {
-				display: none !important; 
-			}
+			#main article h2.major::after { display: none !important; }
 
 			/* ---- Light Mode Navigation Styling ---- */
 			#header nav ul {
@@ -277,17 +274,15 @@
 				border-color: #d4537e !important;
 			}
 
-			/* Light mode button / link tweaks */
 			.button.primary { background-color: var(--accent-color) !important; color: #fff !important; }
 			ul.icons li a { color: var(--text-muted) !important; }
 			ul.icons li a:hover { color: var(--accent-color) !important; }
 
-			/* ---- Name logo dark version for light theme ---- */
 			.name-logo {
 				vertical-align: middle;
 				width: 70px;
 				height: auto;
-				filter: brightness(0.2) opacity(0.85); /* Turns the white logo dark grey */
+				filter: brightness(0.2) opacity(0.85);
 				transition: filter 0.3s ease;
 				mix-blend-mode: multiply;
 			}
@@ -295,7 +290,16 @@
 
 			ul.icons.special { text-align: center; }
 
-			#bg { z-index: 0; }
+			/* ---- Particles Background Enforced Overlay ---- */
+			#bg {
+				position: fixed !important; /* Locks background to viewport */
+				top: 0; left: 0;
+				width: 100vw; height: 100vh;
+				z-index: 0;
+			}
+			#particles-js {
+				width: 100%; height: 100%;
+			}
 			#wrapper { z-index: 3; position: relative; }
 		</style>
 	</head>
@@ -615,7 +619,7 @@
 			<script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
 			<script>
 				tsParticles.load("particles-js", {
-				background: { color: { value: "#f7f8fa" } }, /* Matched to light theme body */
+				background: { color: { value: "#f7f8fa" } }, 
 				fpsLimit: 60,
 				interactivity: {
 					events: {
@@ -630,16 +634,18 @@
 				},
 				particles: {
 					color: {
-						value: ["#222222", "#06d6a0", "#0077b6", "#6d28d9", "#d4537e"] /* Darker colors for light theme */
+						/* Made the particle colors slightly bolder to stand out against white */
+						value: ["#333333", "#06d6a0", "#0284c7", "#7c3aed", "#e11d48"] 
 					},
 					shape: {
 						type: "char",
 						options: {
 							char: {
+								/* Mathematical symbols included clearly */
 								value: ["0", "1", "π", "∑", "σ", "μ", "∂", "∫", "%", "∞", "λ", "∇", "Δ"],
-								font: "Fira Code, monospace",
+								font: "Inter, sans-serif", /* Changed font here so it renders flawlessly */
 								style: "",
-								weight: "400",
+								weight: "600",
 								fill: true
 							}
 						}
@@ -649,7 +655,7 @@
 						distance: 140,
 						color: "#06d6a0",
 						opacity: 0.4,
-						width: 0.8,
+						width: 1,
 						triangles: { enable: false }
 					},
 					move: {
@@ -661,7 +667,7 @@
 						straight: false
 					},
 					number: {
-						value: 60,
+						value: 65,
 						density: { enable: true, area: 900 }
 					},
 					opacity: {
@@ -670,7 +676,7 @@
 						animation: { enable: true, speed: 0.6, minimumValue: 0.25, sync: false }
 					},
 					size: {
-						value: { min: 9, max: 20 },
+						value: { min: 10, max: 22 },
 						random: true
 					},
 					rotate: {
