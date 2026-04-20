@@ -135,6 +135,11 @@
     }
 }
 
+			/* ---- Background colour override ---- */
+			html, body {
+				background-color: #0f1923 !important;
+			}
+
 			/* ---- JetBrains Mono globally ---- */
 			*, body, input, select, textarea, button {
 				font-family: 'JetBrains Mono', monospace !important;
@@ -150,7 +155,33 @@
 				font-size: 0.82em;
 			}
 
-			/* ---- Modernised nav boxes ---- */
+			/* ---- Box opening: Border draw reveal (D) ---- */
+			#main article {
+				transform: translateX(-12px) !important;
+				opacity: 0 !important;
+				transition: opacity 0.45s ease, transform 0.45s ease !important;
+				position: relative;
+			}
+			#main article::before {
+				content: '';
+				position: absolute;
+				inset: 0;
+				border: 2px solid #d4537e;
+				border-radius: 4px;
+				clip-path: inset(0 100% 0 0);
+				transition: clip-path 0.55s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
+				pointer-events: none;
+				z-index: 100;
+			}
+			#main article.active {
+				transform: translateX(0) !important;
+				opacity: 1 !important;
+			}
+			#main article.active::before {
+				clip-path: inset(0 0% 0 0);
+			}
+
+			/* ---- Box / Panel opening style ---- */
 			#header nav ul {
 				display: flex;
 				flex-wrap: wrap;
@@ -544,70 +575,62 @@
 			
 			<script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
 			<script>
-				/* Network graph / data pipeline particles
-			   - Distinct hub nodes (large) + relay nodes (small)
-			   - Strong directional links like a pipeline
-			   - Hover: grab mode highlights connections
-			   - Accent colours: white hubs, teal links, pink highlights
-			*/
-			tsParticles.load("particles-js", {
-				background: { color: { value: "#111316" } },
+				tsParticles.load("particles-js", {
+				background: { color: { value: "#0f1923" } },
 				fpsLimit: 60,
 				interactivity: {
 					events: {
-						onHover: { enable: true, mode: "grab" },
+						onHover: { enable: true, mode: "repulse" },
 						onClick: { enable: true, mode: "push" },
 						resize: true
 					},
 					modes: {
-						grab: {
-							distance: 200,
-							links: { opacity: 0.7, color: "#d4537e" }
-						},
+						repulse: { distance: 120, duration: 0.5 },
 						push: { quantity: 2 }
 					}
 				},
 				particles: {
 					color: {
-						value: ["#ffffff", "#ffffff", "#7dd3fc", "#d4537e", "#a5f3fc"]
+						value: ["#ffffff", "#d4537e", "#7dd3fc", "#a5f3fc", "#c4b5fd"]
 					},
-					links: {
-						color: "#4a90a4",
-						distance: 160,
-						enable: true,
-						opacity: 0.35,
-						width: 1,
-						triangles: { enable: false }
+					shape: {
+						type: "char",
+						options: {
+							char: {
+								value: ["0", "1", "π", "∑", "σ", "μ", "∂", "∫", "%", "∞", "λ", "∇", "Δ"],
+								font: "JetBrains Mono, monospace",
+								style: "",
+								weight: "400",
+								fill: true
+							}
+						}
 					},
-					collisions: { enable: false },
 					move: {
 						direction: "none",
 						enable: true,
-						outModes: { default: "bounce" },
-						random: false,
-						speed: 0.6,
+						outModes: { default: "out" },
+						random: true,
+						speed: 0.7,
 						straight: false
 					},
 					number: {
-						value: 70,
+						value: 55,
 						density: { enable: true, area: 900 }
 					},
 					opacity: {
-						value: 0.85,
-						random: { enable: true, minimumValue: 0.3 }
+						value: 0.45,
+						random: { enable: true, minimumValue: 0.1 },
+						animation: { enable: true, speed: 0.5, minimumValue: 0.1, sync: false }
 					},
-					shape: { type: "circle" },
 					size: {
-						value: { min: 1.5, max: 7 },
+						value: { min: 8, max: 18 },
 						random: true
 					},
-					twinkle: {
-						particles: {
-							enabled: true,
-							frequency: 0.012,
-							opacity: 1,
-							color: { value: "#d4537e" }
-						}
+					rotate: {
+						value: { min: 0, max: 360 },
+						random: true,
+						direction: "random",
+						animation: { enable: true, speed: 3, sync: false }
 					}
 				},
 				detectRetina: true
